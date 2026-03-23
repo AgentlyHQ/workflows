@@ -1,0 +1,17 @@
+import type {ReactNode} from "react";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "Agently Workflows",
+  description: "Agentic workflow definitions served as a JSON API",
+};
+
+export default function RootLayout(props: {
+  children: ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{props.children}</body>
+    </html>
+  );
+}
