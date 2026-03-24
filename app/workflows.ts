@@ -27,7 +27,9 @@ function extractAgents(content: string): string[] {
 
 function extractVariables(content: string): string[] {
   const matches = content.matchAll(/\$\{([A-Z_]+)\}/g);
-  return [...new Set([...matches].map((m) => m[1]))];
+  return [...new Set([...matches].map((m) => m[1]))].filter(
+    (v) => v !== "NAME_OF_VARIABLE",
+  );
 }
 
 export function getWorkflows(): WorkflowMetadata[] {

@@ -31,7 +31,7 @@ When the workflow is complete, run `use-agently balance` again, always report ho
 
 #### Variables look like this `${NAME_OF_VARIABLE}`
 
-If any of the variables used in the workflow are not defined,
+If any of the variables used in the workflow are not defined (excluding the first `${NAME_OF_VARIABLE}`),
 BEFORE you run the workflow, always ask the initiator for the value for each unique variable.
 
 ---
