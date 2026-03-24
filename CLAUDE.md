@@ -60,3 +60,9 @@ interface WorkflowContent extends WorkflowMetadata {
   content: string; // markdown body after frontmatter
 }
 ```
+
+## Maintenance
+
+When adding, removing, or renaming workflows, always update both:
+- **README.md** — the "Available Workflows" table must list every workflow with its name, category, and description
+- **CLAUDE.md** — keep this file in sync with any architectural or convention changes
