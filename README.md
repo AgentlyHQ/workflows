@@ -20,6 +20,7 @@ npx skills add https://github.com/agentlyhq/workflows
 | Workflow                | Category | Description                                                                  |
 |-------------------------|----------|------------------------------------------------------------------------------|
 | AI-Native Team Research | Research | Multi-source intelligence sweep on how AI-native teams operate in any domain |
+| AI Search Toolkit       | Research | Deep research across multiple search engines and domain-specific sources     |
 
 ## API
 

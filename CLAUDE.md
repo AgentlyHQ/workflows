@@ -61,6 +61,10 @@ interface WorkflowContent extends WorkflowMetadata {
 }
 ```
 
+## Finding Agents
+
+When creating or updating workflows, use `use-agently search <query>` to discover available agents on the Agently marketplace. This returns agent IDs, descriptions, supported protocols, and capabilities. Always search for relevant agents rather than hardcoding agent references from memory — the marketplace is constantly growing.
+
 ## Maintenance
 
 When adding, removing, or renaming workflows, always update both:
