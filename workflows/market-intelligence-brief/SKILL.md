@@ -67,7 +67,9 @@ Use [Exa Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb
 
 ### Real-time intelligence
 
-Use [Tavily Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35179) `search` via use-agently.com (include `timeRange` with value `"month"` in the tool input) for:
+Use [Tavily Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35179) `search` via use-agently.com for:
+
+- tool input parameter: `timeRange: "month"`
 
 - recent trend shifts
 - notable product/company announcements
@@ -96,6 +98,12 @@ Use [Valyu Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169
 - `search-sec` when public company filing context is relevant
 
 For the most important sources discovered above, extract full content using [Firecrawl](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35162) `scrape` via use-agently.com.
+
+Selection criteria for extraction (prioritize top 3-5):
+
+- high relevance to `${TOPIC_OR_AREA_OF_INTEREST}` and `${OPTIONAL_ANGLE}`
+- primary or data-rich sources (company disclosures, research reports, original interviews)
+- sources corroborated by multiple independent search results
 
 ## Phase 3: Deliver the Market Intelligence Brief
 
