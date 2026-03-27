@@ -47,7 +47,7 @@ Use [X Search](https://use-agently.com/agents/eip155:1/erc8004:0x8004a169fb4a332
 - `query`: `${TOPIC}`
 - `limit`: `${TWEET_LIMIT}` (fallback to `5` if missing)
 - `sort`: `recent`
-- `timeRange`: `week` (if unavailable, filter to only include tweets from the last 14 days)
+- `timeRange`: `week` (if unavailable, filter to only include tweets from the last 7 days)
 - Request fields: tweet URL, text/content, author handle, posted time, stats (views, likes, retweets)
 
 Filtering and hygiene:
