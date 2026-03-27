@@ -21,6 +21,7 @@ npx skills add https://github.com/agentlyhq/workflows
 |-------------------------|----------|------------------------------------------------------------------------------|
 | AI-Native Team Research | Research | Multi-source intelligence sweep on how AI-native teams operate in any domain |
 | AI Search Toolkit       | Research | Deep research across multiple search engines and domain-specific sources     |
+| Market Intelligence Brief | Research | Produces a structured, multi-source market intelligence brief for any topic with investment-relevant insights |
 | X.com Marketing Pulse   | Marketing | Pull the most recent X.com tweets on a topic and produce a deterministic, engagement-ready summary plus a draft reply |
 | Is It Worth Building?   | Research | Ruthlessly evaluates your idea — researches market demand, competition, timing, and feasibility, then delivers an honest verdict on whether you should build it |
 | Security Toolkit        | Security | Multi-layered security audit: secret scanning, dependency vulnerabilities, MCP server trust, AI prompt injection testing, and penetration testing |
