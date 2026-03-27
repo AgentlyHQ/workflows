@@ -27,9 +27,9 @@ use-agently balance
 
 Fund your wallet with USDC on Base if the balance is zero — agent calls require funds. All commands are dry-run by default. Add --pay to authorize payment. When the workflow is complete, run `use-agently balance` again and report how much was spent.
 
-#### Variables look like this `${NAME_OF_VARIABLE}`
+#### Variables look like this `${TOPIC}` or `${TWEET_LIMIT}`
 
-If any of the variables used in the workflow are not defined (excluding the first `${NAME_OF_VARIABLE}`), BEFORE you run the workflow, always ask the initiator for the value for each unique variable.
+If any of the variables used in the workflow are not defined (excluding the first `${TOPIC}` example above), BEFORE you run the workflow, always ask the initiator for the value for each unique variable.
 
 ---
 
@@ -43,11 +43,12 @@ You are a marketing analyst using Agently to pull fresh X.com signals and prep a
 ## Phase 1: Collect recent tweets (X.com)
 
 Use [X Search](https://use-agently.com/agents/eip155:1/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/27432) via use-agently.com with these parameters:
+This X Search agent is published on Ethereum mainnet (`eip155:1`); the Markdown by Agently renderer later in this workflow is on Base (`eip155:8453`).
 
 - `query`: `${TOPIC}`
 - `limit`: `${TWEET_LIMIT}` (fallback to `5` if missing)
 - `sort`: `recent`
-- `timeRange`: `week`. If the agent lacks `timeRange`, still request a timestamp field (e.g., `posted_at` or `created_at`) and, **after the search results are returned, the AI executor (you) must locally drop any tweet older than 7 days measured from the current time** before selecting the most recent items—no user action is required.
+- `timeRange`: `week`. If the agent lacks `timeRange`, still request a timestamp field (e.g., `posted_at` or `created_at`). After the results return, compute `cutoff = now - 7 days`; as the AI executor, discard any tweet older than the cutoff, then sort by timestamp (newest first) and cap to `${TWEET_LIMIT}`.
 - Request fields: tweet URL, text/content, author handle, timestamp (`posted_at`/`created_at`), and stats (views, likes, retweets)
 
 Filtering and hygiene:
@@ -69,7 +70,7 @@ Rules:
 - `Tweet link` must be the canonical X URL.
 - `Tweet content (concise)` should be trimmed to the essential message; include the author handle inline (e.g., “@handle: ...”).
 - Views, Likes, RTs must be numeric (no commas or units), using the stats returned by the agent. Use `0` if missing.
-- If fewer than `${TWEET_LIMIT}` rows are available, add a single line immediately under the table in this exact format, replacing both placeholders with numbers: `_Only N of M recent tweets found (last 7 days)._` (`N` = actual rows found; `M` = the TWEET_LIMIT value in effect).
+- If fewer than `${TWEET_LIMIT}` rows are available, add a single line immediately under the table in this exact format, replacing both placeholders with numbers: `_Only ACTUAL_COUNT of TWEET_LIMIT recent tweets found (last 7 days)._` (`ACTUAL_COUNT` = rows kept; `TWEET_LIMIT` = the resolved limit value).
 
 ## Phase 3: Engagement helper (default: personal account)
 
