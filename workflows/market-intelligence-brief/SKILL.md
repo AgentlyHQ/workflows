@@ -55,7 +55,7 @@ Run these in parallel where possible and use focused query variations around the
 Use [Brave Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/34848) via use-agently.com:
 
 - `web-search` for market overviews, trend explainers, company analysis, and competitive context
-- `news-search` with freshness `pm` (past month) for the latest month of developments, funding, regulation, launches, and setbacks
+- `news-search` with freshness `pm` (past month) for past-month developments, funding, regulation, launches, and setbacks
 
 ### Deep synthesis + source expansion
 
@@ -67,7 +67,7 @@ Use [Exa Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb
 
 ### Real-time intelligence
 
-Use [Tavily Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35179) `search` via use-agently.com (`timeRange: "month"`) for:
+Use [Tavily Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35179) `search` via use-agently.com (include `timeRange` with value `"month"` in the tool input) for:
 
 - recent trend shifts
 - notable product/company announcements
