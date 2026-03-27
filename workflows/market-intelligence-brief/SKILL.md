@@ -44,7 +44,7 @@ Optional angle: **${OPTIONAL_ANGLE}**
 
 You are a senior market intelligence analyst producing a high-signal brief on this topic. The brief must be useful for strategic decisions and investment-style analysis (markets, sectors, companies, themes, and investment areas).
 
-If `${OPTIONAL_ANGLE}` is blank, default to a balanced market + investment perspective.
+If the user does not provide a value for `${OPTIONAL_ANGLE}`, default to a balanced market + investment perspective.
 
 ## Phase 1: Multi-Source Research Sweep
 
@@ -98,6 +98,7 @@ Use [Valyu Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169
 - `search-sec` when public company filing context is relevant
 
 For the most important sources discovered above, extract full content using [Firecrawl](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35162) `scrape` via use-agently.com.
+Take the selected URLs from Phase 1 and pass each URL into the `scrape` tool input according to the tool schema.
 
 Selection criteria for extraction (prioritize top 3-5):
 
