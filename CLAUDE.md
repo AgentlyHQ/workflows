@@ -65,6 +65,16 @@ interface WorkflowContent extends WorkflowMetadata {
 
 When creating or updating workflows, use `use-agently search <query>` to discover available agents on the Agently marketplace. This returns agent IDs, descriptions, supported protocols, and capabilities. Always search for relevant agents rather than hardcoding agent references from memory — the marketplace is constantly growing.
 
+## Researching Agents Before Writing Workflows
+
+Before writing a workflow, **always fully inspect every agent** you plan to include:
+
+1. `use-agently view --uri <uri>` — get agent name, description, supported protocols, and health status
+2. `use-agently mcp tools --uri <uri>` — list every MCP tool with its full input schema (parameters, types, required fields, enums). This tells you exactly what the tool can do and what arguments to pass
+3. `use-agently a2a card --uri <uri>` — for agents that support A2A, fetch the agent card to see skills, example prompts, input/output modes, and capabilities (streaming, push notifications)
+
+**Why:** Workflow instructions must tell the executor *exactly* which tools to call and what parameters to pass. Without inspecting the full tool schemas and agent cards, workflows end up with vague instructions that produce poor results. The tool schemas are the source of truth for what an agent can do.
+
 ## Maintenance
 
 When adding, removing, or renaming workflows, always update both:
