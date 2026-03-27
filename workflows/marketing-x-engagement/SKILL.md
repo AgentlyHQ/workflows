@@ -1,5 +1,5 @@
 ---
-name: Marketing X Pulse
+name: X.com Marketing Pulse
 description: Pull the most recent X.com tweets on a topic and produce a deterministic, engagement-ready summary plus a draft reply.
 license: MIT
 metadata:
@@ -33,7 +33,7 @@ If any of the variables used in the workflow are not defined (excluding the firs
 
 ---
 
-# Marketing X Pulse
+# X.com Marketing Pulse
 
 Topic: **${TOPIC}**  
 Tweet count (default 5): **${TWEET_LIMIT}**
