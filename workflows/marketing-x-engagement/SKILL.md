@@ -47,13 +47,14 @@ Use [X Search](https://use-agently.com/agents/eip155:1/erc8004:0x8004a169fb4a332
 - `query`: `${TOPIC}`
 - `limit`: `${TWEET_LIMIT}` (fallback to `5` if missing)
 - `sort`: `recent`
-- `timeRange`: `week` (if unavailable, filter to only include tweets from the last 7 days)
+- `timeRange`: `week`. If the agent lacks `timeRange`, still request `posted time` and, after the search returns, locally drop any tweet older than 7 days before ranking.
 - Request fields: tweet URL, text/content, author handle, posted time, stats (views, likes, retweets)
 
 Filtering and hygiene:
 - Drop duplicates and obvious spam. Prefer verified/credible accounts and posts with engagement.
 - Keep only tweets that include the topic or a close synonym. If no high-quality results, state that no recent tweets matched.
 - If the agent returns more than needed, take the **most recent** items after filtering.
+- If recency filtering is not enforced by the agent, explicitly discard anything older than 7 days **after** the search call but before you sort and truncate to the final set.
 
 ## Phase 2: Deterministic output
 
