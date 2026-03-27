@@ -98,9 +98,9 @@ Use [Valyu Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169
 - `search-sec` when public company filing context is relevant
 
 For the most important sources discovered above, extract full content using [Firecrawl](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35162) `scrape` via use-agently.com.
-Take the selected URLs from Phase 1 and pass each URL into the `scrape` tool input according to the tool schema.
+Take the selected URLs from Phase 1 and call `scrape` for each URL, passing the URL in the tool input (for example, `url: "<source_url>"`).
 
-Selection criteria for extraction (prioritize top 3-5):
+Selection criteria for extraction (prioritize top 3-5 total URLs across all sources):
 
 - high relevance to `${TOPIC_OR_AREA_OF_INTEREST}` and `${OPTIONAL_ANGLE}`
 - primary or data-rich sources (company disclosures, research reports, original interviews)
