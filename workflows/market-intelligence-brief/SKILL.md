@@ -27,11 +27,12 @@ use-agently balance
 
 Fund your wallet with USDC on Base if the balance is zero — agent calls require funds. All commands are dry-run by default. Add --pay to authorize payment.
 
-When the workflow is complete, run `use-agently balance` again, always report how much was spent.
+When the workflow is complete, run `use-agently balance` again and report how much was spent in the final response.
 
-#### Variables look like this `${NAME_OF_VARIABLE}`
+#### Variables look like this `${NAME_OF_VARIABLE}` (format example only)
 
-If any of the variables used in the workflow are not defined (excluding the first `${NAME_OF_VARIABLE}`),
+In this workflow, actual variables are `${TOPIC_OR_AREA_OF_INTEREST}` and `${OPTIONAL_ANGLE}`.
+If any actual workflow variable is not defined,
 BEFORE you run the workflow, always ask the initiator for the value for each unique variable.
 
 ---
@@ -55,7 +56,8 @@ Run these in parallel where possible and use focused query variations around the
 Use [Brave Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/34848) via use-agently.com:
 
 - `web-search` for market overviews, trend explainers, company analysis, and competitive context
-- `news-search` with freshness `pm` (past month) for past-month developments, funding, regulation, launches, and setbacks
+- `news-search` for past-month developments, funding, regulation, launches, and setbacks
+- tool input parameter: `freshness: "pm"` (past month)
 
 ### Deep synthesis + source expansion
 
