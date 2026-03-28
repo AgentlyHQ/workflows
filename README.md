@@ -27,6 +27,7 @@ npx skills add https://github.com/agentlyhq/workflows
 | Is It Worth Building?   | Research | Ruthlessly evaluates your idea — researches market demand, competition, timing, and feasibility, then delivers an honest verdict on whether you should build it |
 | Singapore HDB Resale Analysis | Research | Buy/don’t-buy assessment for a Singapore HDB area or block using recent resale comps, trends, lease profile, and caveats |
 | Security Toolkit        | Security | Multi-layered security audit: secret scanning, dependency vulnerabilities, MCP server trust, AI prompt injection testing, and penetration testing |
+| Singapore Condo Analysis | Research | Converts pasted URA condo transaction data plus local context into a grounded buy / wait / avoid recommendation with 4-year post-SSD scenarios |
 
 ## API
 
