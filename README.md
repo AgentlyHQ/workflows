@@ -26,6 +26,7 @@ npx skills add https://github.com/agentlyhq/workflows
 | GEO Site Audit          | Marketing | Pre-checks a target site with Jina, then delivers a weighted GEO audit with scores and a prioritized action plan |
 | Is It Worth Building?   | Research | Ruthlessly evaluates your idea — researches market demand, competition, timing, and feasibility, then delivers an honest verdict on whether you should build it |
 | Security Toolkit        | Security | Multi-layered security audit: secret scanning, dependency vulnerabilities, MCP server trust, AI prompt injection testing, and penetration testing |
+| Singapore Condo Analysis Report | Research | Converts pasted URA condo transaction data plus local context into a grounded buy / wait / avoid recommendation with 4-year post-SSD scenarios |
 
 ## API
 
