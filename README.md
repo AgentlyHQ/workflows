@@ -25,6 +25,7 @@ npx skills add https://github.com/agentlyhq/workflows
 | X.com Marketing Pulse   | Marketing | Pull the most recent X.com tweets on a topic and produce a deterministic, engagement-ready summary plus a draft reply |
 | GEO Site Audit          | Marketing | Pre-checks a target site with Jina, then delivers a weighted GEO audit with scores and a prioritized action plan |
 | Is It Worth Building?   | Research | Ruthlessly evaluates your idea — researches market demand, competition, timing, and feasibility, then delivers an honest verdict on whether you should build it |
+| Singapore HDB Resale Analysis | Research | Buy/don’t-buy assessment for a Singapore HDB area or block using recent resale comps, trends, lease profile, and caveats |
 | Security Toolkit        | Security | Multi-layered security audit: secret scanning, dependency vulnerabilities, MCP server trust, AI prompt injection testing, and penetration testing |
 
 ## API
