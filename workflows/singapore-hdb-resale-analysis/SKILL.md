@@ -27,11 +27,11 @@ use-agently balance
 
 Fund your wallet with USDC on Base if the balance is zero — agent calls require funds. All commands are dry-run by default. Add --pay to authorize payment.
 
-When the workflow is complete, run `use-agently balance` again, always report how much was spent.
+When the workflow is complete, run `use-agently balance` again, and always report how much was spent.
 
-#### Variables look like this `${TARGET_AREA_OR_BLOCK}`
+#### Variables look like this `${NAME_OF_VARIABLE}`
 
-If any of the variables used in the workflow are not defined (excluding the first `${TARGET_AREA_OR_BLOCK}`),
+If any of the workflow variables below are not defined,
 BEFORE you run the workflow, always ask the initiator for the value for each unique variable.
 
 ---
@@ -74,6 +74,10 @@ You are a Singapore HDB resale analyst. Your job is to fetch the latest HDB resa
 
 ## Phase 3: Build comps and trend slices
 
+Use [Perplexity Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35163) via use-agently.com only for method support (for example: validating benchmark calculation approach, clarifying comparable-selection logic, and checking scenario-assumption consistency ahead of Phase 5).
+
+**Do not use Perplexity output to replace or override data.gov.sg transaction values. Data.gov.sg rows remain the primary source of truth.**
+
 - Compute for both the **focus cohort** (block or area match) and **area baseline**:
   - Median and 25th/75th percentile `resale_price` and `price_per_sqm`.
   - 6-month and 12-month median `price_per_sqm` to show direction (MoM/YoY slope if enough points).
@@ -82,7 +86,50 @@ You are a Singapore HDB resale analyst. Your job is to fetch the latest HDB resa
   - Lease profile: median `remaining_lease_years`, share < 60 years, youngest/oldest leases.
 - Select 8–12 best comps: closest in `price_per_sqm` and same `flat_type`; include `month`, `block`, `street_name`, `flat_type`, `storey_range`, `price_per_sqm`, `resale_price`, `remaining_lease_years`.
 
-## Phase 4: Heuristics for recommendation
+## Phase 4: Location convenience and quality signals
+
+Use [Brave Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/34848) `web-search` and [Tavily Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35179) `search` via use-agently.com to gather current local context for `${TARGET_AREA_OR_BLOCK}`.
+
+Score each category from 1–5 with short evidence:
+
+1. **MRT/LRT access** (walkability, interchange convenience, upcoming lines)
+2. **School proximity** (primary/secondary/international where relevant)
+3. **Amenities** (malls, supermarkets, healthcare, parks, dining)
+4. **Area quality signals** (noise/traffic, flood risk mentions, SERS/VERS potential, future supply pipeline, estate rejuvenation plans)
+
+Then produce a weighted local convenience score:
+
+- MRT/LRT 30%
+- Schools 25%
+- Amenities 25%
+- Area quality signals 20%
+
+Include source links and note any conflicting evidence. When Brave and Tavily disagree, use this priority:
+
+1. Most recent official/primary Singapore government sources (for example Land Transport Authority (LTA), HDB, or other government pages), preferring sources published or updated within the past 12 months when available
+2. Reputable mainstream coverage
+3. Document the discrepancy and explain how it affects confidence
+
+## Phase 5: 5-year scenario modeling
+
+Build a 5-year price outlook with bear, base, and bull cases.
+
+For each scenario, explicitly state assumptions for:
+
+- Interest-rate path (up / stable / down trajectory)
+- Government policy (HDB BTO supply levels, resale levy changes, cooling measure adjustments)
+- Lease decay exposure (remaining lease band, CPF usage restrictions approaching 60-year threshold)
+- Market conditions (transaction liquidity, area demand, sentiment)
+
+Output per scenario:
+
+- Expected price range change after 5 years
+- Estimated annualized return range
+- Key upside catalysts
+- Key downside risks
+- What evidence would invalidate the scenario
+
+## Phase 6: Heuristics for recommendation
 
 - Establish quick signals:
   - **Lease risk:** flag if median `remaining_lease_years` < 60 or any comps < 50.
@@ -92,7 +139,7 @@ You are a Singapore HDB resale analyst. Your job is to fetch the latest HDB resa
   - **Dispersion:** high IQR → note heterogeneity or data noise.
 - Output one of: **"Buy / Good value"**, **"Proceed with caution"**, or **"Avoid / overpriced"**, and state the 2–3 strongest drivers.
 
-## Phase 5: Assemble the report
+## Phase 7: Assemble the report
 
 Structure the final report as markdown:
 
@@ -102,7 +149,9 @@ Structure the final report as markdown:
 4. **Trend slice** — 6m vs 12m `price_per_sqm`, direction arrows.
 5. **Comps table** — 8–12 rows with `month`, `block/street`, `flat_type`, `storey_range`, `remaining_lease_years`, `resale_price`, `price_per_sqm`, link back to source row id if provided.
 6. **Lease profile** — distribution, % under 60 years, notes on flats nearing 99-year cap.
-7. **Caveats** — data gaps, low volume warnings, any widening of lookback to satisfy minimum sample.
-8. **Next steps** — what to validate offline (on-site checks, renovation state, facing/stack specifics).
+7. **Location convenience score** — category scores and weighted total from Phase 4.
+8. **Scenario outlook** — bear/base/bull summary table from Phase 5.
+9. **Caveats** — data gaps, low volume warnings, any widening of lookback to satisfy minimum sample.
+10. **Next steps** — what to validate offline (on-site checks, renovation state, facing/stack specifics).
 
-Render the final markdown via [Markdown by Agently](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/25330) using its `render_markdown` tool (confirm input schema with `use-agently mcp tools --uri eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/25330`). Invoke with `markdown` = full report and, if supported, `title` = `HDB Resale Analysis for ${TARGET_AREA_OR_BLOCK}`.
+Whenever you plan to produce a Markdown report, render it using [Markdown by Agently](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/25330) via use-agently.com.
