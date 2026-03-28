@@ -1,5 +1,5 @@
 ---
-name: Singapore Condo Analysis Report
+name: Singapore Condo Analysis
 description: Converts pasted URA condo transaction data plus local context into a grounded buy / wait / avoid recommendation with 4-year post-SSD scenarios.
 license: MIT
 metadata:
@@ -36,7 +36,7 @@ BEFORE you run the workflow, always ask the initiator for the value for each uni
 
 ---
 
-# Singapore Condo Analysis Report
+# Singapore Condo Analysis
 
 Primary target (area or specific project): **${TARGET_AREA_OR_PROJECT}**
 
