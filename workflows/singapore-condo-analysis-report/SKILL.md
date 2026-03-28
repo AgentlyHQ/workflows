@@ -27,11 +27,11 @@ use-agently balance
 
 Fund your wallet with USDC on Base if the balance is zero — agent calls require funds. All commands are dry-run by default. Add --pay to authorize payment.
 
-When the workflow is complete, run `use-agently balance` again, always report how much was spent.
+When the workflow is complete, run `use-agently balance` again, and always report how much was spent.
 
 #### Variables look like this `${NAME_OF_VARIABLE}`
 
-If any of the variables used in the workflow are not defined (excluding the first `${NAME_OF_VARIABLE}`),
+If any of the workflow variables below are not defined,
 BEFORE you run the workflow, always ask the initiator for the value for each unique variable.
 
 ---
@@ -40,7 +40,7 @@ BEFORE you run the workflow, always ask the initiator for the value for each uni
 
 Primary target (area or specific project): **${TARGET_AREA_OR_PROJECT}**
 
-Pasted URA dataset (required, in-chat text/table/CSV/JSON): **${URA_CONDO_DATA_PASTED_IN_CHAT}**
+Pasted URA dataset (required, in-chat text/table/CSV/JSON): **${URA_TRANSACTION_DATA}**
 
 Optional filters:
 
@@ -50,12 +50,13 @@ Optional filters:
 - Tenure preference: **${TENURE_PREFERENCE}** (`leasehold`, `freehold`, or `either`; default: `either`)
 - Market type: **${MARKET_TYPE_FILTER}** (`resale`, `new launch`, or `either`; default: `either`)
 - Housing type: **${HOUSING_TYPE_FILTER}** (`EC`, `condo`, or `either`; default: `either`)
+- Minimum comparable rows target: **${MIN_COMPARABLE_ROWS}** (default: 8)
 
 You are a Singapore residential property analyst. Your job is to produce a practical purchase decision report that is explicitly grounded in the URA transaction data supplied by the user in-chat.
 
 ## Phase 0: Input contract and normalization
 
-1. Confirm `${URA_CONDO_DATA_PASTED_IN_CHAT}` is present. If missing, stop and request it.
+1. Confirm `${URA_TRANSACTION_DATA}` is present. If missing, stop and request it.
 2. Parse pasted rows into a normalized table with at least these fields when available:
    - project_name
    - area_or_district
@@ -73,11 +74,13 @@ You are a Singapore residential property analyst. Your job is to produce a pract
    - If it matches a project name, analyze that project first and use nearby comparables.
    - If it is an area, include relevant projects in that area and immediate neighboring pockets.
 4. Apply optional filters (`${ROOM_TYPE_FILTER}`, `${FLOOR_RANGE_FILTER}`, `${REMAINING_LEASE_FILTER}`, `${TENURE_PREFERENCE}`, `${MARKET_TYPE_FILTER}`, `${HOUSING_TYPE_FILTER}`) and show which rows were included/excluded.
-5. If filtered rows are too sparse for stable conclusions, continue with the nearest broader comparison set and clearly mark confidence as lower.
+5. If filtered rows are fewer than `${MIN_COMPARABLE_ROWS}` (default 8), continue with the nearest broader comparison set and clearly mark confidence as lower.
 
 ## Phase 1: Grounded URA transaction analysis
 
-Use [Perplexity Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35163) via use-agently.com to help structure and verify the analysis framework, but treat user-supplied URA rows as the primary data source of truth.
+Use [Perplexity Search](https://use-agently.com/agents/eip155:8453/erc8004:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/35163) via use-agently.com only for method support (for example: validating benchmark calculation approach, clarifying comparable-selection logic, and checking scenario-assumption consistency).
+
+**Do not use Perplexity output to replace or override user-supplied URA transaction values. URA rows remain the primary source of truth.**
 
 Produce all of the following from the pasted URA data:
 
@@ -85,7 +88,13 @@ Produce all of the following from the pasted URA data:
    - Median, p25, p75 transacted price and psf/psm for the selected target + filters
    - Discount/premium versus area comparables and versus nearest substitute projects
 2. **Comparable transactions table**
-   - At least 8 relevant rows where available
+   - At least `${MIN_COMPARABLE_ROWS}` relevant rows where available (default 8 when unset)
+   - If fewer than `${MIN_COMPARABLE_ROWS}` rows remain after filters, apply this fallback sequence:
+     1. Broaden floor range.
+     2. Broaden remaining lease filter.
+     3. Broaden room type filter.
+   - Keep tenure/market/housing preference unchanged unless still too sparse after the sequence above.
+   - If still fewer than `${MIN_COMPARABLE_ROWS}` rows, proceed with available rows and mark confidence lower.
    - Columns: project, date, unit type, floor range, tenure, area, price, psf/psm, distance to target (if area-based)
 3. **Segmentation insights**
    - By tenure (freehold vs leasehold)
@@ -96,7 +105,7 @@ Produce all of the following from the pasted URA data:
    - Transaction count trend by month/quarter
    - Price momentum and dispersion
 
-Every quantitative claim must cite specific rows from `${URA_CONDO_DATA_PASTED_IN_CHAT}`.
+Every quantitative claim must cite specific rows from `${URA_TRANSACTION_DATA}`.
 
 ## Phase 2: Location convenience and quality signals
 
@@ -116,7 +125,11 @@ Then produce a weighted local convenience score:
 - Amenities 25%
 - Area quality signals 20%
 
-Include source links and note any conflicting evidence.
+Include source links and note any conflicting evidence. When Brave and Tavily disagree, use this priority:
+
+1. Most recent official/primary Singapore government sources (for example Land Transport Authority (LTA), URA, or other government pages), preferring sources published or updated within the past 12 months when available
+2. Reputable mainstream coverage
+3. Document the discrepancy and explain how it affects confidence
 
 ## Phase 3: Post-SSD 4-year scenario modeling
 
