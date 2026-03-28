@@ -22,6 +22,7 @@ npx skills add https://github.com/agentlyhq/workflows
 | AI-Native Team Research | Research | Multi-source intelligence sweep on how AI-native teams operate in any domain |
 | AI Search Toolkit       | Research | Deep research across multiple search engines and domain-specific sources     |
 | Market Intelligence Brief | Research | Produces a structured, multi-source market intelligence brief for any topic with investment-relevant insights, sector dynamics, company signals, and actionable watchpoints |
+| Singapore HDB Resale Buy Analysis | Research | Buy/don’t-buy analysis for a Singapore HDB area or block using data.gov.sg resale transactions, filters, amenities, and scenario framing |
 | X.com Marketing Pulse   | Marketing | Pull the most recent X.com tweets on a topic and produce a deterministic, engagement-ready summary plus a draft reply |
 | GEO Site Audit          | Marketing | Pre-checks a target site with Jina, then delivers a weighted GEO audit with scores and a prioritized action plan |
 | Is It Worth Building?   | Research | Ruthlessly evaluates your idea — researches market demand, competition, timing, and feasibility, then delivers an honest verdict on whether you should build it |
