@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "use-agently": {
+      "source": "agentlyhq/use-agently",
+      "sourceType": "github",
+      "computedHash": "8bf9c4e3d4d311b1a4a7776affe05f0530e218d2ddbf06b3233aaaee5f18cb89"
+    }
+  }
+}
